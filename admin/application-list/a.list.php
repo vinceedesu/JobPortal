@@ -61,7 +61,7 @@
           </form>
       </div>
     </div> <br>
-    <form action="u.listing_pdf.php" method="post">  
+    <form action="a.list_pdf.php" method="post">  
       <input type="submit" name="generate_pdf" class="btn btn-success" value="Generate Report" />  
     </form>  
 
