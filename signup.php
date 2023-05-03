@@ -65,18 +65,18 @@
         <br>
         </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="usertype" id="student">
+              <input class="form-check-input" type="radio" name="usertype" id="usertype" value ="Student">
               <label class="form-check-label" for="student">
               Student
             </div>  
               <br>
             <div class="form-check">  
-              <input class="form-check-input" type="radio" name="usertype" id="employer">
+              <input class="form-check-input" type="radio" name="usertype" id="usertype" value = "Employer">
               <label class="form-check-label" for="employer">
               Employer
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button type="submit" class="btn btn-primary" name="register">Sign Up</button>
           </form>
           <br>  
           <p>Already have an account?<a href="login.php"> Log In</a></p>
@@ -92,7 +92,9 @@
             
             if(isset($_POST['register'])){
                 $username = $_POST['username'];
-                $name = $_POST['name']; 
+                $fname = $_POST['fname'];
+                $lname = $_POST['Lname']; 
+                $name = $fname . " " . $lname;
                 $email = $_POST['email'];   
                 $password = $_POST['password']; 
                 $usertype = $_POST['usertype'];      
