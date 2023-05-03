@@ -5,7 +5,7 @@ include('../../connections.php');
 include('../sessions.php');
 
 
-$results_per_page = 4;
+$results_per_page = 20;
 $sql = "SELECT * FROM job_list";
 $all_jobs = $conn->query($sql);
 $number_of_result = mysqli_num_rows($all_jobs);
@@ -52,7 +52,7 @@ $page_first_result = ($page - 1) * $results_per_page;
           <div class="form-outline" style="display: flex; flex-direction:row; gap: .2rem">
             <input type="search" name="search" id="search" class="form-control" placeholder="search here..." />
             <button type="submit" class="btn btn-primary">
-              <i class="fas fa-search">Search</i>
+              <i class="fas fa-search"></i>
             </button>
           </div>
 

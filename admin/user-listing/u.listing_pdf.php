@@ -10,7 +10,6 @@
       $output .= '<tr>  
                           <td>'.$row["userID"].'</td>   
                           <td>'.$row["username"].'</td> 
-                          <td>'.$row["name"].'</td> 
                           <td>'.$row["email"].'</td>
                           <td>'.$row["userType"].'</td> 
                           
@@ -42,11 +41,10 @@
       <h4 align="center">User List Database</h4><br /> 
       <table border="1" cellspacing="0" cellpadding="3">  
            <tr>  
-                <th align= "center" width="20%"><b>User ID</b></th>    
-                <th align= "center" width="19%"><b>Username</b></th>
-                <th align= "center" width="19%"><b>Name</b></th>  
-                <th align= "center" width="20%"><b>Email</b></th>  
-                <th align= "center" width="20%"><b>Usertype</b></th>
+                <th align= "center" width="10%"><b>User ID</b></th>    
+                <th align= "center" width="30%"><b>Username</b></th>
+                <th align= "center" width="30%"><b>Email</b></th>  
+                <th align= "center" width="30%"><b>User Type</b></th>
                 
            </tr>  
       ';  

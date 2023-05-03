@@ -19,19 +19,16 @@
           <p class="footer-toc fw-bold" style=" margin-top: 25px; color:black;" class="footer-toc">Table of Contents</p>
         </li>
         <li class="">
-          <a class="fw-bold" href="../dashboard/index.php">Home </a>
+          <a class="fw-bold" href="/Job Portal/JobPortal/employer/dashboard/index.php">Home </a>
         </li>
         <li class="">
-          <a class="fw-bold" href="../profile/index.php">Profile</a>
+          <a class="fw-bold" href="/Job Portal/JobPortal/employer/profile/index.php">Profile</a>
         </li>
         <li class="">
-          <a class="fw-bold" href="../jobs/index.php">Jobs</a>
+          <a class="fw-bold" href="/Job Portal/JobPortal/employer/jobs/index.php">Jobs</a>
         </li>
         <li class="">
-          <a class="fw-bold" href="">Candidates</a>
-        </li>
-        <li class="">
-            <a class="fw-bold" href="#">About Us</a>
+          <a class="fw-bold" href="/Job Portal/JobPortal/employer/candidates/candidates.php">Candidates</a>
         </li>
       </ul>
     </div>

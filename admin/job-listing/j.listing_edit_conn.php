@@ -13,15 +13,31 @@ $min = $_POST['min'];
 $max = $_POST['max'];
 
 // Update record in database
-$sql = "UPDATE `job_list` SET `jobID`='$jobID',`jobTitle`='$jobTitle',`jobSummary`='$jobSummary',`jobQuali`='$jobQuali',`jobCategory`='$jobCategory',`jobType`='$jobType',`workSetup`='$workSetup',`min`='$min',`max`='$max' WHERE jobID = $jobID";
+$sql = "UPDATE `job_list` 
+        SET `jobID`='$jobID',
+            `jobTitle`='$jobTitle',
+            `jobSummary`='$jobSummary',
+            `jobQuali`='$jobQuali',
+            `jobCategory`='$jobCategory',
+            `jobType`='$jobType',
+            `workSetup`='$workSetup',
+            `min`='$min',
+            `max`='$max' 
+        WHERE jobID = $jobID";
+
 if (mysqli_query($conn, $sql)) {
-echo "<script type='text/javascript'>alert('Job Post Updated Successfully!') </script>";
-header("location:j.listing.php");
-echo "<script> </script>";
+    $actions = "Updated $jobTitle details.";
+    echo "<script type='text/javascript'>alert('$actions') </script>";
+    include('../to-log.php');
 
+    echo '<script>
+            window.location.href = "j.listing.php";
+          </script>';
 
-} else {
-echo "Error updating record: " . mysqli_error($conn);
+} 
+
+else {
+    echo "Error updating record: " . mysqli_error($conn);
 }
 
 // Close database connection

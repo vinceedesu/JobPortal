@@ -55,12 +55,12 @@
         `firstname` varchar(24),
         `lastname` varchar(24),
         `email` varchar(50),
-        `course` varchar(20),
+        `course` varchar(50),
         `contact_no` varchar(12),
         `address` varchar(140),
         `birthdate` date,
         `sex` varchar(6),
-        `bio` varchar(140),
+        `bio` text(140),
         `p_img` varchar(50),
         `userID` int,
         PRIMARY KEY (`id`),
@@ -87,12 +87,31 @@
     
     // Job Applications Table
     $tablequery = "`job_applications` (
-        `application_id` int AUTO_INCREMENT,
-        `jobID` int,
-        `studentID` int,
-        `status` varchar(10),
-        PRIMARY KEY (`application_id`),
-        FOREIGN KEY (`jobID`) REFERENCES `job_list`(`jobID`),
-        FOREIGN KEY (`studentID`) REFERENCES `student_profile`(`id`)
-      )";
+      `application_id` int AUTO_INCREMENT,
+      `jobID` int,
+      `studentID` int,
+      `companyID` int,
+      `status` varchar(10),
+      PRIMARY KEY (`application_id`),
+      FOREIGN KEY (`jobID`) REFERENCES `job_list`(`jobID`),
+      FOREIGN KEY (`studentID`) REFERENCES `student_profile`(`id`),
+      FOREIGN KEY (`companyID`) REFERENCES `company_list`(`company_id`)
+    )";
     createTable($conn, $tablequery);
+
+    // Sadmin Logs Table
+    $tablequery = "`s_admin_logs` (
+      `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      `admin_id` int(11) NOT NULL,
+      `admin_type` enum('Superadmin','Admin') NOT NULL,
+      `actions` varchar(255) NOT NULL
+    )";
+  createTable($conn, $tablequery);
+
+  // Sadmin Logs Table
+  $tablequery = "`admin_logs` (
+    `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `company_id` int(11) NOT NULL,
+    `actions` varchar(255) NOT NULL
+  )";
+createTable($conn, $tablequery);

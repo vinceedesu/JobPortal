@@ -1,3 +1,4 @@
+<footer>
 <div class="container-fluid mt-5 footer border" style="border: 1px solid; background-color: #800;">
     <div class="row">
       <div class="col-2 my-auto text-center">
@@ -12,16 +13,13 @@
             <a class=" text-white" href="../dashboard/index.php">Home </a>
           </li>
           <li class="">
-            <a class=" text-white" href="../jobs/index.php">Find A Job</a>
+            <a class=" text-white" href="../jobs/find-job.php">Find A Job</a>
           </li>
           <li class="">
-            <a class=" text-white" href="../profile/index.php">My Profile</a>
+            <a class=" text-white" href="../profile/student-profile.php">My Profile</a>
           </li>
           <li class="">
-            <a class=" text-white" href="#">Company Profiles</a>
-          </li>
-          <li class="">
-            <a class=" text-white" href="#">About Us</a>
+            <a class=" text-white" href="../jobs/company-list.php">Company Lists</a>
           </li>
         </ul>
       </div>
@@ -33,11 +31,9 @@
           <li class="">
             <a class="fw-bold"style=" margin-top: 25px; color:aliceblue;" href="https://www.facebook.com/pupcareer/">Career Guides</a>   
             <h6 style= "color:aliceblue;"> Learn more to help you in starting your career journey!</h6>
+            <p class="text-sm" style="color:aliceblue;">Job Portal Solutions © 2023 Grp 2 & 10 <br> All rights reserved.</p>
           </li>
         </ul>
       </div>
-      <div class="">
-        <p class="text-sm-center" style="color:aliceblue;">Job Portal Solutions © 2023 Grp 2 & 10 <br> All rights reserved.</p>
-      
-      </div>
-    </div>
+          </div>
+</footer>

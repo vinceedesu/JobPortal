@@ -1,8 +1,8 @@
 <?php
 include('../../connections.php');
-if (isset ($_GET['id'])){
+if (isset ($_GET['jobID'])){
 
-    $jobID = $_GET["id"];
+    $jobID = $_GET["jobID"];
 
     $sql = "SELECT jobTitle FROM job_list WHERE jobID = $jobID";
     $result = mysqli_query($conn, $sql);
@@ -10,16 +10,11 @@ if (isset ($_GET['id'])){
     $jobTitle = $row['jobTitle'];
 
     $company_id = $_SESSION['company_id'];
-    $actions = "Deleted a job: $jobTitle";
-    $dataquery = "admin_logs(company_id, actions)";
-    $valuequery="('$company_id', '$actions')";
+    $actions = "Deleted job: $jobTitle";
+    include '../to-log.php';
 
-    $sql = "INSERT INTO $dataquery VALUES $valuequery";
-    mysqli_query($conn, $sql);
-    $sql = "DELETE FROM `job_list` WHERE jobID = $jobID";
+    $sql = "DELETE FROM job_list WHERE jobID = $jobID";
     $conn->query($sql);
-
-    mysqli_query($conn, $sql);
 }
 
 header("location: index.php");

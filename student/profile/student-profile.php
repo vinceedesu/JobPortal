@@ -18,12 +18,13 @@
     include '../navbar.php';  
 ?>
 
-<div class="container">
-    <br> <br>
+<div class="container mb-3 pb-3 mt-5">
+ <div class="row mt-5">
+              </div>
   
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-4 ">
-        <div class="container-fluid mt-5 mr-5 pb-4 shadow rounded">
+        <div class="container-fluid shadow rounded">
           <div class="row">
             <div class="col-12 mx-auto text-center mt-3" style="height: 150px;">
             <?php
@@ -48,17 +49,19 @@
                 } else {
                     echo "<img src='../../assets/img/student-profile/$p_img' class='img-fluid rounded-circle' alt='profile picture' style='height: 150px; width: 150px;'>";
                 }
+
+                $bio = $row['bio'];
                 ?>
              
             </div>
             <div class="col-12 mt-3">
               <p class="text-center fs-3"><?php echo $fullname ?></p>
             </div>
-            <div class="col-6">
-              <p class="fs-3">Bio</p>
+            <div class="col-12 text-center">
+              <p class="fs-3">About Me:</p>
             </div>
-            <div class="col-12 mt-0 d-flex justify-content-evenly text-sm-start">
-              <p class="fs-4 d-flex justify-content-evenly text-md-start"><?php echo $row['bio'] ?></p>
+            <div class="col-12 mt-0">
+              <p class="fs-5 text-wrap lh-sm text-break text-justify mx-4"><?php echo $bio ?></p>
             </div>
           </div>
           <div class="row">
@@ -72,19 +75,17 @@
           </div>
         </div>
       </div>
-      <div class="col mt-5 ms-4">
+      <div class="col  ms-4">
         <div class="container-fluid">
-        <div class="row">
-                <div class="col d-flex flex-row-reverse">
-                  <a href="edit-profile.php" class="btn btn-primary">Edit Profile</a>
-                </div>
-              </div>
-          <div class="row">
+                 <div class="row">
             <div class="col-12 pt-3 shadow rounded">
               <div class="container-fluid">
                 <div class="row">
                   <div class="col">
                     <p class="fs-1 bold">Basic Information</p>
+                  </div>
+                  <div class ="col d-flex flex-row-reverse mb-auto mt-2">
+                    <a href="edit-profile.php" class="btn btn-primary">Edit Profile</a>
                   </div>
                 </div>
                 <div class="row">

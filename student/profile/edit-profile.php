@@ -32,40 +32,91 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
                 </div>
             </div>
             <div class="row mt-3">
-                <div class="col d-flex flex-row-reverse">
+                <div class="col-7 d-flex flex-row-reverse">
                 <?php
 
                     $p_img = $row['p_img'];
 
-                    if ($logo == null) { ?>
+                    if ($p_img == null) { ?>
 
-                        <img src='../../assets/img/no-profile.png' class='img-fluid' alt='profile picture' style='height: 150px; width: 150px;'>";
+                        <img src='../../assets/img/no-profile.png' class='img-fluid rounded-circle' alt='profile picture' style='height: 150px; width: 150px;'>";
                     <?php } else {
-                        echo "<img src='../../assets/img/student-profile/$p_img' class='img-fluid' alt='profile picture' style='height: 150px; width: 150px;'>";
+                        echo "<img src='../../assets/img/student-profile/$p_img' class='img-fluid rounded-circle' alt='profile picture' style='height: 150px; width: 150px;'>";
                     }
                 ?>
             </div>
-                <div class="col mt-auto me-n5">
-                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            
+                <div class="col mt-auto n-margin">
+                    <button type="button" class="btn btn-primary btn-sm rounded-circle" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         +
                     </button>
+
 
                                 <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
 
+                        <?php
+                                if(isset($_POST['updateImg'])){
+                                    $p_img = $_FILES['p_img']['name'];
+                                    $target = "../../assets/img/student-profile/".basename($_FILES['p_img']['name']);
+                                    $sql ="UPDATE student_profile 
+                                    SET p_img = '$p_img'
+                                    WHERE id = $student_id";
+
+                                    
+                                    if (mysqli_query($conn, $sql)) {
+                                        move_uploaded_file($_FILES['p_img']['tmp_name'], $target);
+                                        echo "<script type='text/javascript'>alert('Profile Picture Updated Successfully!') </script>";
+                                        echo '<script>
+                                                window.location.href = "student-profile.php";
+                                            </script>';
+                                    } else {
+                                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                                    }
+
+
+                                }
+                                if(isset($_POST['updateInfo'])){
+                                    $fname = $_POST['firstname'];
+                                    $lname = $_POST['lastname'];
+                                    $email = $_POST['email'];
+                                    $course = $_POST['course'];
+                                    $contact_no = $_POST['contact_no'];
+                                    $address = $_POST['address'];
+                                    $birthdate = $_POST['birthdate'];
+                                    $sex = $_POST['sex'];
+                                    $bio = $_POST['bio'];
+
+                                    
+                                        $sql ="UPDATE student_profile 
+                                            SET firstname='$fname', lastname='$lname', email='$email', course='$course', contact_no='$contact_no', address='$address', birthdate='$birthdate', sex='$sex', bio='$bio' 
+                                            WHERE id='$student_id'";
+
+                                        if (mysqli_query($conn, $sql)) {
+                                            echo "<script type='text/javascript'>alert('Profile Updated Successfully!') </script>";
+                                            echo '<script>
+                                                    window.location.href = "student-profile.php";
+                                                </script>';
+
+                                        } else {
+                                            echo "Error updating record: " . mysqli_error($conn);
+                                        }       
+                            }
+                            ?>
+
                             <div class="modal-content">
-                                <form action="" method="POST">
+                                <form action="" method="POST" enctype="multipart/form-data">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Upload Picture</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <input type="file">
+                                    <input type="file" name="p_img" accept="image/png, image/jpg, image/jpeg, image/PNG">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" name = "updataImg">Save changes</button>
+                                    <button type="submit" class="btn btn-primary" name ="updateImg" value="p_img">Save changes</button>
                                 </div>
                                 </form>
                             </div>
@@ -77,30 +128,23 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
             <div class="row mt-3">
                 <div class="col form-group">
                     <label for="name" class="fw-bold">First Name</label>
-                    <input type="text" class="form-control" name= "firstname" id="firstname" value= "<?php echo $row['firstname']; ?>">
+                    <input type="text" class="form-control" name= "firstname" id="firstname" value= "<?php echo $row['firstname']; ?>" REQUIRED>
                 </div>
                 <div class="col form-group">
                     <label for="address" class="fw-bold">Last Name</label>
-                    <input type="text" class="form-control" name= "lastname" id="lastname" value= "<?php echo $row['lastname']; ?>">
+                    <input type="text" class="form-control" name= "lastname" id="lastname" value= "<?php echo $row['lastname']; ?>" REQUIRED>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class=" col form-group">
                     <label for="email" class="fw-bold">Email</label>
-                    <input type="text" class="form-control" name= "email" id="email" value= "<?php echo $row['email']; ?>">
-                </div>
-            </div>
-            <div class="row">
-                <div class ="col">
-                    <div id="editEmail">
-
-                    </div>
+                    <input type="text" class="form-control" name= "email" id="email" value= "<?php echo $row['email']; ?>" REQUIRED>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col form-group">
                 <label class="signup_label" for="course">Program:</label> 
-                <select class="select_dropdown" id="course" name="course" value= "<?php echo $row['course']; ?>">
+                <select class="select_dropdown" id="course" name="course" value= "<?php echo $row['course']; ?>" REQUIRED>
                     <option value=""> Choose Course </option>
                     <optgroup label="College of Accountancy and Finance (CAF)">
                     <option value="Accountancy"> Bachelor of Science in Accountancy (BSA)  </option>
@@ -192,25 +236,44 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
             <div class="row mt-3">
                 <div class="col form-group">
                     <label for="contact_no" class="fw-bold">Contact Number</label>
-                    <input type="text" class="form-control" name= "contact_no" id="contact_no" value= "<?php echo $row['contact_no']; ?>">
+                    <input type="text" class="form-control" name= "contact_no" id="contact_no" value= "<?php echo $row['contact_no']; ?>" REQUIRED>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col form-group">
                     <label for="address" class="fw-bold">Address</label>
-                    <input type="text" class="form-control" name= "address" id="address" value= "<?php echo $row['address']; ?>">
+                    <input type="text" class="form-control" name= "address" id="address" value= "<?php echo $row['address']; ?>" REQUIRED>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="form-group">
                     <label for="birthdate" class="fw-bold">Birthdate</label>
-                    <input type="text" class="form-control" name= "birthdate" id="birthdate" value= "<?php echo $row['birthdate']; ?>">
+                    <input type="date" class="form-control" name= "birthdate" id="birthdate" value= "<?php echo $row['birthdate']; ?>" REQUIRED>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col form-group" class="">
+                    <label for="sex" class="fw-bold">Sex: <br></label>
+                            <select class="select_dropdown" name="sex">
+                                <?php
+                                    if($row['sex']=='Male'){
+                                        echo '<option value="Male" selected>Male</option>';
+                                        echo '<option value="Female">Female</option>';
+                                    }
+                                    else{
+                                        echo '<option value="Male">Male</option>';
+                                        echo '<option value="Female" selected>Female</option>';    
+                                    }
+                                ?>
+                            </select>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col form-group">
-                    <label for="sex" class="fw-bold">Sex</label>
-                    <input type="text" class="form-control" name= "sex" id="sex" value= "<?php echo $row['sex']; ?>">
+                    <label for="sex" class="fw-bold">Bio</label>
+                    <textarea class="form-control" id="bio" name="bio" rows="8" cols="40" value= "sex">
+                    <?php echo $row['bio']; ?>
+                    </textarea>
                 </div>
             </div>
             <div class="row mt-5">
@@ -218,7 +281,7 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
                     <button type="submit" class="btn btn-primary" name="updateInfo">Update</button>
                 </div>
                 <div class="col">
-                    <a href="s.profile.php" class="btn btn-danger">Cancel</a>
+                    <a href="student-profile.php" class="btn btn-danger">Cancel</a>
                 </div>
             </div>
         </form>
@@ -228,30 +291,23 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
 <?php
     if(isset($_POST['updateImg'])){
         $p_img = $_FILES['p_img']['name'];
-        $target = "../assets/img/student-profile/".basename($_FILES['p_img']['name']);
+        $target = "../../assets/img/student-profile/".basename($_FILES['p_img']['name']);
         $sql ="UPDATE student_profile 
         SET p_img = '$p_img'
         WHERE id = $student_id";
 
-
-        if(move_uploaded_file($_FILES['p_img']['tmp_name'], $target)){
-            echo "Image uploaded successfully";
+        
+        if (mysqli_query($conn, $sql)) {
+            move_uploaded_file($_FILES['p_img']['tmp_name'], $target);
+            echo "<script type='text/javascript'>alert('Profile Picture Updated Successfully!') </script>";
             echo '<script>
-            window.location.href = "profile/student-profile.php";
-          </script>';
-
-          if (mysqli_query($conn, $sql)) {
-            echo "<script type='text/javascript'>alert('Profile Updated Successfully!') </script>";
-            header("location:edit-profile.php");
-            echo "<script> </script>";
-
+                    window.location.href = "student-profile.php";
+                  </script>';
         } else {
-            echo "Error updating record: " . mysqli_error($conn);
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
 
-        }else{
-            echo "There was a problem uploading image";
-        }
+
     }
     if(isset($_POST['updateInfo'])){
         $fname = $_POST['firstname'];
@@ -262,7 +318,7 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
         $address = $_POST['address'];
         $birthdate = $_POST['birthdate'];
         $sex = $_POST['sex'];
-        $bio = $_POST['bio'];
+        $bio = htmlspecialchars($_POST['bio']);
 
         
             $sql ="UPDATE student_profile 
@@ -282,4 +338,4 @@ selectWhere($conn, 'student_profile', '*', 'id', $student_id);
 ?>
     </body>
 
-</html>
+</html> 

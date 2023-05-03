@@ -15,6 +15,9 @@ if(isset($_POST['submit'])) {
     $sql ="UPDATE company_list SET name='$name', employer_name='$employer_name', email='$email', contact_no='$contact_no', address='$address', size='$size', overview='$overview' WHERE email='$email'";
 
     if (mysqli_query($conn, $sql)) {
+        $actions = "Updated Company Profile of $name";
+        include '../to-log.php';
+
         echo "<script type='text/javascript'>alert('Company Updated Successfully!') </script>";
         echo '<script>
         window.location.href = "index.php";

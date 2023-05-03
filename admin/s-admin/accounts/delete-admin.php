@@ -11,7 +11,7 @@ if (isset ($_GET['id'])){
     $sql = "DELETE FROM `admin_accounts` WHERE id = $id";
     $conn->query($sql);
 
-    $actions = "Deleted $username from the table.";
+    $actions = "Deleted $username from Admin Accounts.";
     include('../../to-log.php');
 }
 

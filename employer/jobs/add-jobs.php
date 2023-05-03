@@ -16,8 +16,9 @@
 
 <body style="background-image: url('');">
 <?php
+include '../navbar.php';
 ?>
-  <div id="PostJobCon" class="container-sm mt-5 py-5 p-5 bg-light login-form">
+  <div id="PostJobCon" class="container-sm mb-5 mt-5 py-5 p-5 bg-light login-form">
     <form method= "POST">
 
       <div class="form-group">
@@ -115,11 +116,7 @@
 
             $company_id = $_SESSION['company_id'];
             $actions = "Added a job: $jobTitle";
-            $dataquery = "admin_logs(company_id, actions)";
-            $valuequery="('$company_id', '$actions')";
-
-            $sql = "INSERT INTO $dataquery VALUES $valuequery";
-            mysqli_query($conn, $sql);
+            include '../to-log.php';
             
             echo '<script>
             window.location.href = "index.php";

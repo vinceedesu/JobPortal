@@ -14,15 +14,27 @@ $sex = $_POST['sex'];
 $bio = $_POST['bio'];
 
 
-$sql ="UPDATE student_profile SET firstname='$fname', lastname='$lname', email='$email', course='$course', contact_no='$contact_no', address='$address', birthdate='$birthdate', sex='$sex', bio='$bio' WHERE email='$email'";
-
-
+$sql ="UPDATE student_profile 
+        SET firstname='$fname', 
+            lastname='$lname', 
+            email='$email', 
+            course='$course', 
+            contact_no='$contact_no', 
+            address='$address', 
+            birthdate='$birthdate', 
+            sex='$sex', 
+            bio='$bio' 
+        WHERE firstname='$fname'"; // change to id after include
 
 
 if (mysqli_query($conn, $sql)) {
-    echo "<script type='text/javascript'>alert('Company Updated Successfully!') </script>";
-    header("location:s.profile.php");
-    echo "<script> </script>";
+    $actions = "Updated $fname $lname\'s details from Student Profiles.";
+    echo "<script type='text/javascript'>alert('$actions') </script>";
+    include('../to-log.php');
+
+    echo '<script>
+            window.location.href = "s.profile.php";
+          </script>';
 
 } else {
     echo "Error updating record: " . mysqli_error($conn);

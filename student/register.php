@@ -9,7 +9,7 @@
                 $contact_no = $_POST['contact_no'];
                 $sex = $_POST['sex'];
                 $birthdate = $_POST['birthdate'];
-                $bio = $_POST['bio'];
+                $bio = htmlentities($_POST['bio']);
                 
                 $user_id=$_SESSION['user_id'];
                 
@@ -29,7 +29,7 @@
                     }
                   } else {
                     $dataquery = "student_profile(firstname,lastname,email,course,contact_no,address,birthdate,sex,bio, p_img, userID)";
-                    $valuequery="('$firstname','$lastname','$email','$course','$contact_no','$address','$birthdate','$sex','$bio','$p_img','$user_id')";
+                    $valuequery="('$firstname','$lastname','$email','$course','$contact_no','$address','$birthdate','$sex','".$bio."','$p_img','$user_id')";
                     insertData($conn,$dataquery,$valuequery);
                     
                     if(move_uploaded_file($_FILES['p_img']['tmp_name'], $target)){

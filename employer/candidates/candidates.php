@@ -85,7 +85,7 @@
     
     <div class="pt-5 px-5 pb-0">
     <h1>Candidates</h1>
-    <br>
+    <!-- <br>
 
 <div class="candidate-links">
     <nav>
@@ -95,7 +95,7 @@
           <li><a href="#">Rejected</a></li>
         </ul>
       </nav>
-</div>
+</div> -->
       
 
 
@@ -106,36 +106,41 @@
         <div class="row">
 
         <?php
-
-            $sql = "SELECT * FROM job_applications WHERE status='Pending'";
+            $company_id = $_SESSION['company_id'];
+            $sql = "SELECT * FROM job_applications WHERE companyID='$company_id' AND status='Pending'";
             $result = mysqli_query($conn, $sql);
 
             if(mysqli_num_rows($result)>0){
               while($row = mysqli_fetch_assoc($result)){
                 $student_id = $row['studentID'];
+                $jobID = $row['jobID'];
+
                 $sql = "SELECT * FROM student_profile WHERE id = '$student_id'";
                 $result2 = mysqli_query($conn, $sql);
                 $row2 = mysqli_fetch_assoc($result2);
+                
+                $sql = "SELECT * FROM job_list WHERE jobID = '$jobID'";
+                $result3 = mysqli_query($conn, $sql);
+                $row3 = mysqli_fetch_assoc($result3);
 
                 ?>
                 <div class='col-12 col-sm-6 col-md-4 col-lg-3'>
                 <div class='candidate'>
                   <div class='picture'>
-                    <!-- <img class='img-fluid' src='../../assets/img/student-profile/<?php echo $row2['p_img'];?>' alt='student pic'> -->
-                    <img class='img-fluid' src='' alt='student pic'>
+                    <img class='img-fluid' src='../../assets/img/student-profile/<?php echo $row2['p_img'];?>' alt='student pic'>
+                    <img class='img-fluid' src='' alt=''>
                   </div>
                   <div class='candidate-content'>
                     <h5 class='name'><?php echo $row2['firstname']." ".$row2['lastname'];?></h5>
-                    <h6 class='admin_index_formtitle'><?php echo $row2['bio'];?></h6>
+                    <h6 class='admin_index_formtitle'><?php echo $row3['jobTitle'];?></h6>
                     <p class='button'><a href='student-profile.php?student_id=<?php echo $row['studentID']; 
                     ?>&app_id=<?php echo $row['application_id']; 
                     ?>'>View Profile</a></p>
                   </div>
                 </div>
-              </div>";
+              </div>
               <?php
               }
-
             }
         ?>
 

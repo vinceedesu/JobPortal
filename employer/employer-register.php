@@ -48,7 +48,7 @@
                 <label class="signup_label" for="C.size">Company Size:</label>  
                 <input type="number" name="size" placeholder="" class="signup_input" required>
                 <label class="signup_label" for="C.logo">Company Logo:</label> 
-                <input class="signup_input4" type="file" name="logo" accept="image/png, image/jpg, image/jpeg, image/PNG">
+                <input class="signup_input4" type="file" name="logo" accept="image/png, image/jpg, image/jpeg, image/PNG" required>
                 <label class="signup_label" for="C.overview">Company Overview:</label>           
                 <textarea id="overview" name="overview" rows="8" cols="40" class="form-control"></textarea>
                 <div class="button_div">

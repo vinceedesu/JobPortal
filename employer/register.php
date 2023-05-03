@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
 
     // insert data
     $sql = "INSERT INTO $tablename (name,employer_name, email, address, contact_no, size, logo, overview, userID) values 
-    ('$name','$employer_name', '$email', '$address', '$contact', '$size', '$logo', '$overview', $userID)";
+    ('$name','$employer_name', '$email', '$address', '$contact', '$size', '$logo', '".$overview."', $userID)";
 
     if ($conn->query($sql) === TRUE) {
 

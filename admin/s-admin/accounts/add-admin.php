@@ -99,7 +99,9 @@
                     $actions = "Added $username as $admintype.";
                     include('../../to-log.php');
 
-                    header('Location: admin-accounts.php');
+                    echo '<script>
+            window.location.href = "admin-accounts.php";
+          </script>';
                   }
             }
         ?>

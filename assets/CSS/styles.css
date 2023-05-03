@@ -54,6 +54,10 @@ body {
 .footer{
   background-color: #800;
   bottom: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  
 }
 
 .footer-toc{
@@ -309,4 +313,8 @@ span {
 .cheese:hover{
   text-decoration: none;
   color: black;
+} 
+
+.n-margin{
+  margin-left: -50px;
 }

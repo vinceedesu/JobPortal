@@ -32,13 +32,15 @@
     $sql = "SELECT * FROM job_list WHERE jobID = '$jobID'";
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
+
+    include 'jobs-edit-conn.php'
     ?>
 
 <div class="col-15 ">
-            <form action="" method="post">
+            <form action="jobs-edit-conn.php" enctype="multipart/form-data" method="post">
 
             <div class="form-group">
-                <input type="hidden" name="<?php echo $row['jobID']?>" value=
+                <input type="hidden" name="jobID" value=
                 '<?php echo $row['jobID']?>'>
             </div>
 
@@ -211,6 +213,18 @@
                         echo "<option value='Transportation/Logistics' > Transportation/Logistics </option>";
                         echo "<option value='Wholesale/Retail and Distribution' selected> Wholesale/Retail and Distribution </option>";
                         
+                    }else{
+                        echo "<option value='Business and Financial Services' > Business and Financial Services </option>";
+                        echo "<option value='Construction' > Construction </option>";
+                        echo "<option value='Education' > Education </option>";
+                        echo "<option value='Food & Beverage/Catering/Restaurant' > Food & Beverage/Catering/Restaurant </option>";
+                        echo "<option value='Health, Pharmaceuticals, and Biotech' > Health, Pharmaceuticals, and Biotech </option>";
+                        echo "<option value='Hospitality' > Hospitality </option>";
+                        echo "<option value='Information Technology' > Information Technology </option>";
+                        echo "<option value='Law Firm' > Law Firm </option>";
+                        echo "<option value='Real Estate' > Real Estate </option>";
+                        echo "<option value='Transportation/Logistics' > Transportation/Logistics </option>";
+                        echo "<option value='Wholesale/Retail and Distribution' > Wholesale/Retail and Distribution </option>";
                     }
                     ?>
 
@@ -224,13 +238,17 @@
                     <?php
                     if($row['workSetup'] == 'WFH'){
                         echo "<option value='WFH' selected>Work from Home </option>";
+                        echo "<option value='On-site'>On-site</option>";
+                    }else{
+                        echo "<option value='WFH'>Work from Home </option>";
+                        echo "<option value='On-site' selected>On-site</option>";
                     }
                     ?>
                 </select>
                
             </div> <br>
 
-            <div class="form-group">
+            <div class="row">
                 <label for="jobTitle" class= "form-label mb-2 fw-bold">Salary</label>
                 <br>
                 <div class="col">
@@ -242,12 +260,10 @@
                 </div> <br>
                 <br>
                 <br>
-                <?php
-                include ('jobs-edit-conn.php');
-                ?>
                 </div>  <br>
-                    <button type="submit" name="submit" class="btn btn-primary">Update</button>
-                    <a href="index.php" class="btn btn-danger">Cancel</a> 
+
+                <button type="submit" name="submit" class="btn btn-primary">Update</button>
+                <a href="index.php" class="btn btn-danger">Cancel</a> 
             </form>
 
                 </div>

@@ -43,7 +43,7 @@ include '../navbar.php';
 ?>
 
 
-  <div class="container justify-content-center mt-50 mb-50">
+  <div class="container justify-content-center mt-4 mb-4">
     <div class="row justify-content-center">
       <div class="col-10 center">
         <div class="card card-body">

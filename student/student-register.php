@@ -131,8 +131,10 @@
                 <input type="text" name="address" class="signup_input2" placeholder="somewhere" required>
                 <label class="form-group" for="S.contact_no">Phone No.:</label>  
                 <input class="signup_input" type="tel" id="contact_no" name="contact_no" pattern="[0-9]{11}" placeholder="09XXXXXXXXX" required>
+
                 <label class="signup_label" for="S.logo">Upload Profile:</label>
-                <input class="signup_input4" type="file" name="p_img" accept="image/png, image/jpg, image/jpeg, image/PNG">
+                <input class="signup_input4" type="file" name="p_img" accept="image/png, image/jpg, image/jpeg, image/PNG" required>
+
                 <label class="signup_label">Sex:</label> 
                 <select class="select_dropdown" id="sex" name="sex">
                     <option value="none"> Select Sex </option>

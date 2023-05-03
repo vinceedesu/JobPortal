@@ -1,6 +1,5 @@
 <?php
 
-
 if(isset($_POST['submit'])) {
 
 
@@ -11,20 +10,20 @@ if(isset($_POST['submit'])) {
     $workSetup = $_POST['workSetup'];
     $min = $_POST['min'];
     $max = $_POST['max'];
-    $jobID = $row['jobID'];
+    $jobID = $_POST['jobID'];
 
-    $sql = "UPDATE job_list SET jobTitle = '$jobTitle', jobSummary = '$jobSummary', jobQuali = '$jobQuali', jobCategory = '$jobCategory', workSetup = '$workSetup', min = '$min', max = '$max' WHERE jobID = '$jobID'";
-
-    $company_id = $_SESSION['company_id'];
-    $actions = "Edited a job: $jobTitle";
-    $dataquery = "admin_logs(company_id, actions)";
-    $valuequery="('$company_id', '$actions')";
-
-    $sql = "INSERT INTO $dataquery VALUES $valuequery";
-    mysqli_query($conn, $sql);
-
+    $sql = "UPDATE job_list SET
+    jobTitle = '$jobTitle',
+    jobSummary = '$jobSummary',
+    jobQuali = '$jobQuali',
+    jobCategory = '$jobCategory',
+    workSetup = '$workSetup',
+    min = '$min', max = '$max' WHERE jobID = '$jobID'";
 
     if (mysqli_query($conn, $sql)) {
+        $company_id = $_SESSION['company_id'];
+        $actions = "Edited a job: $jobTitle";
+        include '../to-log.php';
        
         echo "<script> window.location.href = 'index.php' </script>'";
         echo "<script type='text/javascript'>alert('Job Updated Successfully!') </script>";

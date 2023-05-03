@@ -19,7 +19,7 @@
 <?php
    include '../navbar.php';  
 ?>
-<div class="container">
+<div class="container my-3">
     <div class="row p-5 border mt-5 shadow">
         <div class="container">
             <div class="row">
@@ -41,6 +41,17 @@
                   <tbody>
                       <tr>
                         <?php
+
+
+                          function statusCheck($status, $app_id){
+                            if($status=='Pending'){
+                              echo "<td> <a class='btn btn-danger' href='cancel-app.php?app_id=$app_id'>Cancel</button></td>";
+                            }
+                            else{
+                              echo "<td></td>";
+                            }
+                          }
+
                           $student_id = $_SESSION['student_id'];
                           $sql = "SELECT * FROM job_applications WHERE studentID = '$student_id'";
                           $result = $conn->query($sql);
@@ -66,7 +77,7 @@
                                           echo "<td>" . $row2['jobTitle'] . "</td>";
                                           echo "<td>" . $row3['name'] . "</td>";
                                           echo "<td>" . $row['status'] . "</td>";
-                                          echo "<td> <button class='btn btn-danger btn-sm'> Cancel </button></td>";
+                                          statusCheck($row['status'], $row['application_id']);
                                       }
                                   }
                               }

@@ -4,10 +4,11 @@ if (isset ($_GET['userID'])){
     $userID = $_GET["userID"];
     include('../../connections.php');
 
-    $utypeSql = "SELECT userType FROM `users` WHERE userID = $userID";
+    $utypeSql = "SELECT userType, username FROM `users` WHERE userID = $userID";
     $result = mysqli_query($conn, $utypeSql);
     $row = $result->fetch_assoc();
     $utype = $row['userType'];
+    $username = $row['username'];
 
     if ($utype == 'Student'){
         $sidSql = "SELECT id FROM `student_profile` WHERE userID = $userID";
@@ -47,6 +48,9 @@ if (isset ($_GET['userID'])){
 
     $sql = "DELETE FROM `users` WHERE userID = $userID";
     $conn->query($sql);
+
+    $actions = "Deleted $username from Users.";
+    include('../to-log.php');
 }
 
 header("location:u.listing.php");

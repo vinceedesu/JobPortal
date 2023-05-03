@@ -28,36 +28,44 @@
 
     <div class="row mb-2 pb-2">
       <!-- <div class="col-auto mb-2"> -->
-      <div class="col-auto">
+      <!-- <div class="col-auto">
         <label for="entries" class="col-sm-1 col-form-label">Show</label>
       </div>
       <div class="col-1">
         <input type="text" class="form-control" id="entries">
-      </div>
-      <div class="col-1 col-md-7">
+      </div> -->
+      <!-- <div class="col-1 col-md-7">
         <label for="entries" class="col-sm-1 col-form-label">entries</label>
-      </div>
+      </div> -->
       <!-- search bar(or palitan mo nalang nung search bar na gawa nyo) -->
       <div class="col-auto">
         <label for="search" class="col-form-label">Search:</label>
       </div>
       <div class="col-auto">
         <form action="" method="GET">
-        <input type="search" name="search" id="search" class="form-control">
-        <button type="submit" class="btn btn-primary">
-              <i class="fas fa-search">Search</i>
+        <div class="input-group">
+          <div class="form-outline" style="display: flex; flex-direction:row; gap: .2rem">
+            <input type="search" name="search" id="search" class="form-control" placeholder="search here..." />
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+
+        </div>
             </button>
           </form>
       </div>
     </div> <br>
-    <form action="j.listing_pdf.php" method="post">  
-      <input type="submit" name="generate_pdf" class="btn btn-success" value="Generate Report" />  
+    <form action="" method="post">  
+      <button type="button" name="export-xls" class="btn btn-warning" onclick="tableToExcel('excel-table-jlist', 'W3C Excel Table')"><i class="fa-sharp fa-solid fa-file-excel"></i>&nbsp Export Table</button>
     </form>  
-
+        <?php
+        include_once '../../export.php';
+        ?>
   </div>
 
 
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm" id="excel-table-jlist">
     <thead>
       <tr>
       <th scope="col">
