@@ -116,3 +116,197 @@ body {
 .stud-btn2{
   background-color: #800;
 }
+
+/************************* CTTO SEIYA *************************/
+.login_bg {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.login_form {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.login_container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  height: 100vh;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.login_icon {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 70%;
+  align-self: center;
+}
+.header_login {
+  font-weight: 600;
+  font-size: 2rem;
+  margin: 2rem;
+  text-align: center;
+}
+.login_label {
+  font-weight: 700;
+  margin: .5rem 5rem .5rem 5rem;
+}
+.login_input {
+  margin: 0 5rem 0 5rem;
+  height: 4rem;
+  border-radius: 1rem;
+}
+.login_button {
+  margin: 1rem;
+  width: fit-content;
+  padding: .5rem 2rem;
+  align-self: center;
+  background-color: #C73030;
+  color: white;
+  border-style: none;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
+.login_subtext{
+  font-weight: 500;
+  align-self: center;
+  margin: .4rem;
+}
+
+.signup_container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.signup_bg{
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.signup_header {
+  display: flex;
+  width: 100%;
+  background: linear-gradient(96.27deg, rgba(124, 36, 36, 0.38) 41.72%, rgba(247, 199, 36, 0) 110.03%);
+  justify-content: center;
+}
+.header_icon {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 20%;
+}
+.signup_footer {
+  display: flex;
+  width: 100%;
+  background: linear-gradient(96.27deg, rgba(124, 36, 36, 0.38) 41.72%, rgba(247, 199, 36, 0) 110.03%);
+  justify-content: center;
+  padding: 2rem;
+}
+.footer_text {
+  text-align: center;
+}
+.signup_form {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: auto;
+  margin: 2rem;
+  gap: 1.5rem;
+}
+.signup_label {
+  font-weight: 700;
+}
+.signup_input {
+  width: 50%;
+  border-style: solid;
+  padding: 1rem;
+}
+.signup_input2 {
+  width: 70%;
+  border-style: solid;
+  padding: 1rem;
+}
+.signup_input3{
+  width: 90%;
+  border-style: solid;
+  padding: 1rem;
+}
+.password_div{
+  display: flex;
+}
+.password_col {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+.signup_button {
+  color: white;
+  background: #344FDA;
+  width: fit-content;
+  align-self: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+  border-style: none;
+}
+span {
+  cursor: default;
+}
+.admin_index_form {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  height: auto;
+  padding: 6rem 2rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+.select_dropdown {
+  width: fit-content;
+  padding: .5rem;
+  border-style: solid;
+}
+.signup_input4 {
+  border-style: none;
+  width: fit-content;
+}
+.bday_calendar {
+  width: fit-content;
+  padding: .5rem;
+}
+.button_div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.cheese{
+  text-decoration: none;
+  color: black;
+}
+
+.cheese:hover{
+  text-decoration: none;
+  color: black;
+}

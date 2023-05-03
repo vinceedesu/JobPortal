@@ -15,13 +15,42 @@
 
     <body>
 
-        <?php
-        
-            include('../navbar.php');
-        
-        ?>
+
+    <?php
+        include('../s-admin-navbar.php');
+    ?>
 
             <h1>Admin Logs</h1>
+            
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Admin ID</th>
+                    <th>Admin Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+
+                    $sql = "SELECT * FROM s_admin_logs";
+                    $result = mysqli_query($conn, $sql);
+
+                    if(mysqli_num_rows($result)>0){
+                        while($row = mysqli_fetch_assoc($result)){
+                            echo "<tr>";
+                            echo "<td>" . $row['id'] . "</td>";
+                            echo "<td>" . $row['admin_id'] . "</td>";
+                            echo "<td>" . $row['admin_type'] . "</td>";
+                            echo "<td>" . $row['actions'] . "</td>";
+                            echo "</tr>";
+                        }
+                    }
+
+                ?>
+            </tbody>
+        </table>
         
     </body>
 

@@ -9,38 +9,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include '../header-link.php'; ?>
-
+    <link rel="stylesheet" href="../assets/CSS/styles.css">
+    <link rel="stylesheet" href="../assets/CSS/loginBg.css">
     <title>Admin Portal</title>
 </head>
-<body>
+<body style="display: flex;">
 
-<section class="vh-100 d-flex justify-content-center align-items-center">
-      <div class="container py-5 pt-1 h-100 ">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-xl-10 ">
-            <div class="card" style="border-radius: 1.5rem;">
-              <div class="row g-0">
-                <div class="col-md-12 col-lg-12 px-5 d-flex align-items-center">
-                  <div class="card-body p-4 text-black">
-    
-                <form action="index.php" method="post">
-                    <h1>Admin Portal</h1>
-                    <br>
-                    <div class=form-group>
-                        <label for="username">Username</label>
-                        <br>
-                        <input class="form-control" type="text" name="username" placeholder="Enter username">
-                    </div>
-                    <br>
-                    <div class=form-group>
-                    
-                        <label for="password">Password</label>
-                        <br>
-                        <input class="form-control" type="password" name="password" placeholder="Enter password">
-                    </div>
-                    <br>
-                    <input class="btn btn-primary" type="submit" name="login" value="Sign In">
-            
+<section class="login_container">
+  <div class="login_bg">
+    <form class="admin_index_form" action="index.php" method="post">
+      <img src="../assets/img/jobportal_logo3.png" class="login_icon"/>
+      <span class="header_login">Admin Portal</span>
+      <label class = "login_label"for="username">Username</label>
+      <input class="login_input" type="text" name="username" placeholder="Enter username">
+      <label class="login_label" for="password">Password</label>
+      <input class="login_input" type="password" name="password" placeholder="Enter password">
+      <input class="login_button" type="submit" name="login" value="Sign In">
+    </form>
+  </div>
+      
+              
             <?php
                 
                 if(isset($_POST['login'])){
@@ -55,6 +43,7 @@
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
                             $_SESSION['username']=$username;
+                            $_SESSION['admin_id']=$row['id'];
                             $_SESSION['admin_type']=$row['admin_type'];
                             
                             if($row['admin_type']=='Superadmin'){

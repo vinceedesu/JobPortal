@@ -1,24 +1,25 @@
-<?php
-            
+<?php 
+
             if(isset($_POST['submit'])){
                 $firstname = $_POST['firstname'];
                 $lastname = $_POST['lastname']; 
-                $email = $_POST['email'];   
-                $address = $_POST['address'];
+                $email = $_POST['email'];
+                $course = $_POST['course'];
+                $address = $_POST['address'];   
+                $contact_no = $_POST['contact_no'];
                 $sex = $_POST['sex'];
                 $birthdate = $_POST['birthdate'];
-                $student_id = "3";
                 $bio = $_POST['bio'];
                 
-
-                $tablename="user_profile";
-                $columnquery="*";
- 
-               
+                $user_id=$_SESSION['user_id'];
                 
-                $result = selectWhere($conn, $tablename, $columnquery, 'student_id', $student_id);
+                $p_img = $_FILES['p_img']['name'];
+                $target = "../assets/img/student-profile/".basename($_FILES['p_img']['name']);
 
+                $tablename="student_profile";
+                $columnquery="*";
 
+                $result = selectWhere($conn, $tablename, $columnquery, 'email', $email);
 
                 if ($result->num_rows > 0) {
                     // output data of each row
@@ -27,8 +28,18 @@
                         echo "Account Exist";
                     }
                   } else {
-                    $dataquery = "user_profile(firstname,lastname,email,student_id,address,birthdate,sex,bio)";
-                    $valuequery="('$firstname','$lastname','$email','$student_id','$address','$birthdate','$sex','$bio')";
+                    $dataquery = "student_profile(firstname,lastname,email,course,contact_no,address,birthdate,sex,bio, p_img, userID)";
+                    $valuequery="('$firstname','$lastname','$email','$course','$contact_no','$address','$birthdate','$sex','$bio','$p_img','$user_id')";
                     insertData($conn,$dataquery,$valuequery);
+                    
+                    if(move_uploaded_file($_FILES['p_img']['tmp_name'], $target)){
+                        echo "Image uploaded successfully";
+                        echo '<script>
+                        window.location.href = "profile/student-profile.php";
+                      </script>';
+                    }else{
+                        echo "There was a problem uploading image";
+                    }
+
                   }
-            }
+                }

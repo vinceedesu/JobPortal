@@ -5,13 +5,12 @@
     $conn->query($sql);
 
     // Create Table
-    function createTable($conn, $tablename, $tablequery){
-        $sql = "CREATE TABLE IF NOT EXISTS ".$tablename.
-        $tablequery;
+    function createTable($conn, $tablequery){
+        $sql = "CREATE TABLE IF NOT EXISTS ".$tablequery;
         $conn->query($sql);
     }
 
-    // Insert Data to Table
+    // Insert Data to Tablename(co)
     function insertData($conn, $dataquery, $valuequery){
         $sql = "INSERT INTO ".$dataquery."
         VALUES ".$valuequery;
@@ -29,6 +28,12 @@
     function selectWhere($conn, $tablename, $columnquery, $condition, $value){
         $sql = "SELECT $columnquery FROM $tablename
         WHERE $condition='$value'";
+        $result = $conn->query($sql);
+        return $result;
+    }
+    function sortData($conn, $tablename, $columnquery, $orderBy){
+        $sql = "SELECT $columnquery FROM $tablename
+        ORDER BY $orderBy";
         $result = $conn->query($sql);
         return $result;
     }

@@ -1,13 +1,13 @@
 <?php
     // Admin Accounts Table
-    $tablequery = "(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    $tablequery = "admin_accounts(id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(30) NOT NULL,
     name VARCHAR(30) NOT NULL,
     email VARCHAR(50),    
     password VARCHAR(100),
     admin_type enum('Admin','Superadmin'),
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP)";
-    createTable($conn, "admin_accounts", $tablequery);
+    createTable($conn, $tablequery);
 
     // Superadmin Account    
 	$sql = "SELECT * FROM admin_accounts WHERE username='superadmin'";
@@ -22,96 +22,77 @@
 		//echo "Superadmin exists.";
 	}
 
- $tablequery = "(
-        userID int(6) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        username varchar(50) NOT NULL,
-        name varchar(50) NOT NULL,
-        email varchar(50) NOT NULL,
-        password varchar(50) NOT NULL,
-        userType enum('Student','Employer') NOT NULL
-        )";
-    createTable($conn, "users", $tablequery);
+ $tablequery = "`users` (
+    `userID` int AUTO_INCREMENT,
+    `username` varchar(24),
+    `email` varchar(50),
+    `password` varchar(100),
+    `userType` varchar(10),
+    PRIMARY KEY (`userID`)
+  )";
+    createTable($conn, $tablequery);
 
     // Company List Table
-    $tablequery = "(
-        company_id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        name varchar(50) NOT NULL,
-        email varchar(50) NOT NULL,
-        address varchar(50) NULL,
-        contact_no VARCHAR(50) NOT NULL, 
-        size VARCHAR(50) NULL, 
-        logo VARCHAR(50) NULL, 
-        overview TEXT(120) NULL,
-        employer_id VARCHAR(50) NOT NULL
-        )";
-    createTable($conn, "company_list", $tablequery);
+    $tablequery = "`company_list` (
+        `company_id` int AUTO_INCREMENT,
+        `name` varchar(50),
+        `employer_name` varchar(50),
+        `email` varchar(50),
+        `address` varchar(140),
+        `contact_no` varchar(12),
+        `size` int,
+        `logo` varchar(50),
+        `overview` varchar(140),
+        `userID` int,
+        PRIMARY KEY (`company_id`),
+        FOREIGN KEY (`userID`) REFERENCES `users`(`userID`)
+      )";
+    createTable($conn, $tablequery);
 
-    // User Profile Table
-    $tablequery = "(
-        id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-        firstname varchar(50) NOT NULL,
-        lastname varchar(50) NOT NULL,
-        email varchar(50) NOT NULL,
-        student_id VARCHAR(50) NOT NULL, 
-        address VARCHAR(120) NOT NULL, 
-        birthdate DATE NOT NULL, 
-        sex VARCHAR (6) NOT NULL,
-        bio TEXT(200) NULL
-        )";
-    createTable($conn, "student_profile", $tablequery);
-
-    // // Admin Accounts Table
-    // $tablequery = "(
-    //     `companyID` int,
-    //     `companyName` varchar(50),
-    //     `companyAddress` varchar(50),
-    //     `companyLogo` varchar(50),
-    //     `companySize` varchar(50),
-    //     `companyOverview` varchar(50),
-    //     `companyEmail` varchar(50),
-    //     PRIMARY KEY (`companyName`)
-    //     )";
-    // createTable($conn, "company", $tablequery);
-
-    // // Admin Accounts Table
-    // $tablequery = "(
-    //     `employerID` int,
-    //     `email` varchar(50),
-    //     `password` varchar(50),
-    //     `employerName` varchar(50),
-    //     `companyName` varchar(50),
-    //     PRIMARY KEY (`employerID`)
-    //   )";
-    // createTable($conn, "employer", $tablequery);
-
+    // Student Profile Table
+    $tablequery = "`student_profile` (
+        `id` int AUTO_INCREMENT,
+        `firstname` varchar(24),
+        `lastname` varchar(24),
+        `email` varchar(50),
+        `course` varchar(20),
+        `contact_no` varchar(12),
+        `address` varchar(140),
+        `birthdate` date,
+        `sex` varchar(6),
+        `bio` varchar(140),
+        `p_img` varchar(50),
+        `userID` int,
+        PRIMARY KEY (`id`),
+        FOREIGN KEY (`userID`) REFERENCES `users`(`userID`)
+      )";
+    createTable($conn, $tablequery);
     
-    // // Admin Accounts Table
-    $tablequery = "(
-        `jobID` int(6) AUTO_INCREMENT PRIMARY KEY,
-        `jobTitle` varchar(50) NOT NULL,
-        `jobSummary` varchar(50) NOT NULL,
-        `jobQuali` varchar(50) NOT NULL,
-        `jobCategory` varchar(50) NOT NULL,
-        `jobType` varchar(50) NOT NULL,
-        `workSetup`  varchar(50) NOT NULL,
-        `jobSalary` int(11) NOT NULL,
-        `CompanyId` int(11) NOT NULL
-        )";
-    createTable($conn, "job_list", $tablequery);
-
-    // // Admin Accounts Table
-    // $tablequery = "(
-    //     `studentID` int,
-    //     `email` varchar(50),
-    //     `Password` varchar(50),
-    //     `studentName` varchar(50),
-    //     `Address` varchar(50),
-    //     `contactNo` varchar(50),
-    //     `dateofBirth` date,
-    //     `educationalBackground` varchar(50),
-    //     `Skills` varchar(50),
-    //     `Gender` varchar(50),
-    //     `Bio` varchar(250),
-    //     PRIMARY KEY (`studentID`)
-    //   )";
-    // createTable($conn, "student_list", $tablequery);
+    // Job List Table
+    $tablequery = "`job_list` (
+        `jobID` int AUTO_INCREMENT,
+        `jobTitle` varchar(25),
+        `jobSummary` varchar(50),
+        `jobQuali` varchar(50),
+        `jobCategory` varchar(16),
+        `jobType` varchar(16),
+        `workSetup` varchar(16),
+        `min` int(8),
+        `max` int(8),
+        `CompanyId` int,
+        PRIMARY KEY (`jobID`),
+        FOREIGN KEY (`CompanyId`) REFERENCES `company_list`(`company_id`)
+      )";
+    createTable($conn, $tablequery);
+    
+    // Job Applications Table
+    $tablequery = "`job_applications` (
+        `application_id` int AUTO_INCREMENT,
+        `jobID` int,
+        `studentID` int,
+        `status` varchar(10),
+        PRIMARY KEY (`application_id`),
+        FOREIGN KEY (`jobID`) REFERENCES `job_list`(`jobID`),
+        FOREIGN KEY (`studentID`) REFERENCES `student_profile`(`id`)
+      )";
+    createTable($conn, $tablequery);

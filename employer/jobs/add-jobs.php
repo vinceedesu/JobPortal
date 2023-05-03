@@ -1,11 +1,8 @@
-
-
 <?php 
   include('../../connections.php');
-  include('../../sessions.php');
-
-
+  include('../sessions.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,9 +15,10 @@
 </head>
 
 <body style="background-image: url('');">
-
+<?php
+?>
   <div id="PostJobCon" class="container-sm mt-5 py-5 p-5 bg-light login-form">
-    <form action= add-jobs.php method= "POST">
+    <form method= "POST">
 
       <div class="form-group">
         <label for="job_title">Job Title</label>
@@ -43,18 +41,17 @@
         <label for="job_category">Job Category</label> <br> <br>
         <select id="job_category" name="job_category">
             <option value="none"> Choose Job Category  </option>
-            <option value="business"> Business and Financial Services  </option>
-            <option value="construction"> Construction  </option>
-            <option value="education"> Education  </option>
-            <option value="restaurant"> Food & Beverage/Catering/Restaurant </option>
-            <option value="health"> Health, Pharmaceuticals, and Biotech </option>
-            <option value="hospitality"> Hospitality </option>
-            <option value="it"> Information Technology </option>
-            <option value="law"> Law Firm </option>
-            <option value="estate"> Real Estate </option>
-            <option value="transpo"> Transportation/Logistics  </option>
-            <option value="distribution"> Wholesale/Retail and Distribution  </option>
-            
+            <option value="Business and Financial Services"> Business and Financial Services  </option>
+            <option value="Construction"> Construction  </option>
+            <option value="Education"> Education  </option>
+            <option value="Food & Beverage/Catering/Restaurant"> Food & Beverage/Catering/Restaurant </option>
+            <option value="Health, Pharmaceuticals, and Biotech"> Health, Pharmaceuticals, and Biotech </option>
+            <option value="Hospitality"> Hospitality </option>
+            <option value="Information Technology"> Information Technology </option>
+            <option value="Law Firm"> Law Firm </option>
+            <option value="Real Estate"> Real Estate </option>
+            <option value="Transportation/Logistics "> Transportation/Logistics  </option>
+            <option value="Wholesale/Retail and Distribution"> Wholesale/Retail and Distribution  </option>
         </select>
       </div>
       <br>
@@ -78,51 +75,60 @@
 
       <div class="form-group">
         <label for="exampleInputEmail1salary">Salary</label>
-        <input type="text" name= "salary" class="form-control" 
-          placeholder="Enter Salary">
+        <input type="number" name= "min" class="form-control" 
+          > -
+          <input type="number" name= "max" class="form-control" 
+          >
       </div>
       <br>
-      
       <br>
       <button type="submit" class="btn btn-primary" name="postJob">Post</button>
-
-
-      <?php
-            
-            if(isset($_POST['postJob'])){
-                $jobTitle = $_POST['job_title'];
-                $jobSummary = $_POST['job_summary']; 
-                $jobQuali = $_POST['job_reqs'];   
-                $jobCategory = $_POST['job_category']; 
-                $jobType = $_POST['job_type']; 
-                $workSetup = $_POST['workSetup']; 
-                $jobSalary = $_POST['salary'];
-                $companyID = $_SESSION['companyId'];    
-                $tablename="job_list";
-                $columnquery="*";
- 
-               
-                
-                $result = selectWhere($conn, $tablename, $columnquery, 'jobTitle', $jobTitle);
-
-
-
-                if ($result->num_rows > 0) {
-                    // output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        
-                        echo "Job Exist";
-                    }
-                  } else {
-                    $dataquery = "job_list(jobTitle, jobSummary, jobQuali, jobCategory, jobType, workSetup, jobSalary, CompanyId)";
-                    $valuequery="('$jobTitle','$jobSummary','$jobQuali','$jobCategory','$jobType', '$workSetup', '$jobSalary', '$companyID')";
-                    insertData($conn,$dataquery,$valuequery);
-                  }
-            }
-        ?>
     </form>
+
+
+    
+    <?php          
+    $company_id=$_SESSION['company_id'];
+          
+    if(isset($_POST['postJob'])){
+        $jobTitle = $_POST['job_title'];
+        $jobSummary = $_POST['job_summary']; 
+        $jobQuali = $_POST['job_reqs'];   
+        $jobCategory = $_POST['job_category']; 
+        $jobType = $_POST['job_type']; 
+        $workSetup = $_POST['workSetup']; 
+        $min = $_POST['min'];
+        $max = $_POST['max'];
+
+        $tablename="job_list";
+        $columnquery="*";
+        $result = selectWhere($conn, $tablename, $columnquery, 'jobTitle', $jobTitle);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "Job Exist";
+            }
+          } else {
+            $dataquery = "job_list(jobTitle, jobSummary, jobQuali, jobCategory, jobType, workSetup, min, max, companyID)";
+            $valuequery="('$jobTitle','$jobSummary','$jobQuali','$jobCategory','$jobType', '$workSetup', '$min' , '$max', $company_id)";
+            insertData($conn, $dataquery, $valuequery);
+
+            $company_id = $_SESSION['company_id'];
+            $actions = "Added a job: $jobTitle";
+            $dataquery = "admin_logs(company_id, actions)";
+            $valuequery="('$company_id', '$actions')";
+
+            $sql = "INSERT INTO $dataquery VALUES $valuequery";
+            mysqli_query($conn, $sql);
+            
+            echo '<script>
+            window.location.href = "index.php";
+            </script>';
+          }
+
+        }
+      ?>
+
   </div>
-
 </body>
-
 </html>
