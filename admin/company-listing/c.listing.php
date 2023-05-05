@@ -56,7 +56,8 @@
           </form> <br> 
       </div>
       <form action="" method="post">  
-      <button type="button" name="export-xls" class="btn btn-warning" onclick="tableToExcel('excel-table', 'W3C Excel Table')"><i class="fa-sharp fa-solid fa-file-excel"></i>&nbsp Export File</button>
+      <button type="button" name="export-xls" class="btn btn-warning" onclick="tableToExcel('excel-table-clist', 'W3C Excel Table')"><i class="fa-sharp fa-solid fa-file-excel"></i>&nbsp Export Table</button>
+
     </form>  
         <?php
         include_once '../../export.php';
@@ -64,7 +65,7 @@
   </div>
 
 
-  <table class="table table-striped table-sm" id="excel-table">
+  <table class="table table-striped table-sm" id="excel-table-clist">
     <thead>
       <tr>
         <th scope="col">
