@@ -43,21 +43,29 @@
       </div>
       <div class="col-auto">
         <form action="" method="GET">
-        <input type="search" name="search" id="search" class="form-control">
-        <button type="submit" class="btn btn-primary">
-              <i class="fas fa-search">Search</i>
+        <div class="input-group">
+          <div class="form-outline" style="display: flex; flex-direction:row; gap: .2rem">
+            <input type="search" name="search" id="search" class="form-control" placeholder="search here..." />
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+
+        </div>
             </button>
           </form>
       </div>
     </div> <br>
-    <form action="j.listing_pdf.php" method="post">  
-      <input type="submit" name="generate_pdf" class="btn btn-success" value="Generate Report" />  
+    <form action="" method="post">  
+      <button type="button" name="export-xls" class="btn btn-warning" onclick="tableToExcel('excel-table-jlist', 'W3C Excel Table')"><i class="fa-sharp fa-solid fa-file-excel"></i>&nbsp Export File</button>
     </form>  
-
+        <?php
+        include_once '../../export.php';
+        ?>
   </div>
 
 
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm" id="excel-table-jlist">
     <thead>
       <tr>
       <th scope="col">

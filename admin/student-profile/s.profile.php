@@ -45,24 +45,28 @@
       </div>
       <div class="col-auto">
       <form action="" method="GET">
-        <input type="search" name="search" id="search" class="form-control">
-        <button type="submit" class="btn btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-</svg>
-              <i class="bi bi-search"></i>
+      <div class="input-group">
+          <div class="form-outline" style="display: flex; flex-direction:row; gap: .2rem">
+            <input type="search" name="search" id="search" class="form-control" placeholder="search here..." />
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
             </button>
+          </div>
+
+        </div>
           </form>
       </div>
     </div> <br>
-    <form action="s.profile_pdf.php" method="post">  
-      <input type="submit" name="generate_pdf" class="btn btn-success" value="Generate Report" />  
+    <form action="" method="post">  
+      <button type="button" name="export-xls" class="btn btn-warning" onclick="tableToExcel('excel-table-sprofile', 'W3C Excel Table')"><i class="fa-sharp fa-solid fa-file-excel"></i>&nbsp Export File</button>
     </form>  
-
+        <?php
+        include_once '../../export.php';
+        ?>
   </div>
 
 
-  <table class="table table-striped table-sm">
+  <table class="table table-striped table-sm" id="excel-table-sprofile">
     <thead>
       <tr>
       <th scope="col">
